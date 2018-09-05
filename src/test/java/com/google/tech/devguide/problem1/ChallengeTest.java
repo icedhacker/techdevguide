@@ -17,12 +17,13 @@ public class ChallengeTest {
   }
 
   @Test
-  public void sampleTestCase() {
+  public void sampleTestCaseWithSolutionOne() {
     Instant start = Instant.now();
-    String actual = challenge.solve("abppplee", "able", "ale", "apple", "bale", "kangaroo");
+    String actual = challenge
+        .solveWithSolnOne("abppplee", "able", "ale", "apple", "bale", "kangaroo");
     Instant finish = Instant.now();
     assertThat(actual).isEqualTo("apple");
-    long timeElapsed = Duration.between(start, finish).toNanos();
+    long timeElapsed = Duration.between(start, finish).toMillis();
     System.out.println("Execution Time is " + timeElapsed);
   }
 }
