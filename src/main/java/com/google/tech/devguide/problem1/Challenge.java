@@ -1,7 +1,11 @@
 package com.google.tech.devguide.problem1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Challenge {
 
@@ -48,5 +52,50 @@ public class Challenge {
   private String[] sortArrayByCharLengthDesc(String[] dictionary) {
     Arrays.sort(dictionary, Comparator.comparing(String::length));
     return dictionary;
+  }
+
+  public String solveWithSolnTwo(String sequence, String... dictionary) {
+    sortArrayByCharLengthDesc(dictionary);
+    Map<Character, List<Integer>> charMap = createCharMap(sequence);
+    for (int i = dictionary.length - 1; i >= 0; i--) {
+      if (isSubSequenceWithMap(dictionary[i], charMap)) {
+        return dictionary[i];
+      }
+    }
+    return null;
+  }
+
+  private Map<Character, List<Integer>> createCharMap(String word) {
+    Map<Character, List<Integer>> charMap = new HashMap<>();
+    int i = 0;
+    for (char ch : word.toCharArray()) {
+      List<Integer> tempList = charMap.containsKey(ch) ? charMap.get(ch) : new ArrayList<>();
+      tempList.add(i);
+      charMap.put(ch, tempList);
+      i++;
+    }
+    return charMap;
+  }
+
+  private boolean isSubSequenceWithMap(String subSequence,
+      Map<Character, List<Integer>> sequenceMap) {
+    int lastIndex = -1;
+    for (char ch : subSequence.toCharArray()) {
+      if (!sequenceMap.containsKey(ch)) {
+        return false;
+      }
+      boolean found = false;
+      for (int i : sequenceMap.get(ch)) {
+        if (i > lastIndex) {
+          found = true;
+          lastIndex = i;
+          break;
+        }
+      }
+      if (!found) {
+        return false;
+      }
+    }
+    return true;
   }
 }

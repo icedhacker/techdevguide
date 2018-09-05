@@ -23,7 +23,18 @@ public class ChallengeTest {
         .solveWithSolnOne("abppplee", "able", "ale", "apple", "bale", "kangaroo");
     Instant finish = Instant.now();
     assertThat(actual).isEqualTo("apple");
-    long timeElapsed = Duration.between(start, finish).toMillis();
+    long timeElapsed = Duration.between(start, finish).toNanos();
+    System.out.println("Execution Time is " + timeElapsed);
+  }
+
+  @Test
+  public void sampleTestCaseWithSolutionTwo() {
+    Instant start = Instant.now();
+    String actual = challenge
+        .solveWithSolnTwo("abppplee", "able", "ale", "apple", "bale", "kangaroo");
+    Instant finish = Instant.now();
+    assertThat(actual).isEqualTo("apple");
+    long timeElapsed = Duration.between(start, finish).toNanos();
     System.out.println("Execution Time is " + timeElapsed);
   }
 }
