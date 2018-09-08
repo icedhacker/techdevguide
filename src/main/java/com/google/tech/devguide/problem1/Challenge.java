@@ -54,6 +54,26 @@ public class Challenge {
     return dictionary;
   }
 
+  /**
+   * Second Solution :
+   *
+   * 1. Sort the Dictionary by String Length
+   *
+   * 2. Create a Map with the character and all index positions from the sequence.
+   *
+   * 3. Use the map to check if the words in the dictionary are a subsequence.
+   *
+   * 4. If true, return the dictionary word. Else, Continue.
+   *
+   * 5. If no match found, return null.
+   *
+   * Consider 'N' as length of sequence, 'M' as length of dictionary & 'W' as length of word in
+   * dictionary.
+   *
+   * Space Complexity : O(1)
+   *
+   * Time Complexity : O(N + W * log N )
+   */
   public String solveWithSolnTwo(String sequence, String... dictionary) {
     sortArrayByCharLengthDesc(dictionary);
     Map<Character, List<Integer>> charMap = createCharMap(sequence);
